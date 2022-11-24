@@ -1,6 +1,7 @@
 package com.example.sharedandroid.auth.login
 
 import android.util.Log
+import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sharedandroid.auth.AuthScreenState
@@ -34,7 +35,12 @@ class LoginViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun isValidEmail(email: String) = authInteractors.isValidEmail(email)
+    //Not using interactor because IDE displays error when using actual class with invoke
+    //For release swap to interactor
+    //fun isValidEmail(email: String) = authInteractors.isValidEmail(email)
+    fun isValidEmail(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
 
     fun isValidPassword(password: String) = authInteractors.isValidPassword(password)
 

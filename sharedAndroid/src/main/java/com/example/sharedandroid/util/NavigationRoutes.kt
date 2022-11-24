@@ -4,4 +4,5 @@ object NavigationRoutes {
     const val REGISTER = "register"
     const val LOGIN = "login"
     const val PROFILE = "profile"
+    const val SPLASH = "splash"
 }

@@ -1,10 +1,7 @@
 package com.example.clientandroidapp.di
 
 import com.example.automobile.auth.IAccountService
-import com.example.automobile.auth.interactors.AuthInteractors
-import com.example.automobile.auth.interactors.IsValidEmail
-import com.example.automobile.auth.interactors.IsValidPassword
-import com.example.automobile.auth.interactors.Login
+import com.example.automobile.auth.interactors.*
 import com.example.automobile.network.ISessionSource
 import dagger.Module
 import dagger.Provides
@@ -24,7 +21,8 @@ class InteractorsModule {
         return AuthInteractors(
             Login(accountService, sessionSource),
             IsValidEmail(),
-            IsValidPassword()
+            IsValidPassword(),
+            GetSessionFromDevice(sessionSource)
         )
     }
 }
