@@ -16,7 +16,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        //testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.mechanicandroidapp.di.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -53,12 +54,24 @@ android {
 
 dependencies {
     implementation(project(":shared"))
+    implementation(project(":sharedAndroid"))
+
+    //TEST
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    androidTestImplementation("junit:junit:4.13.2")
+    testImplementation("com.google.dagger:hilt-android-testing:${rootProject.extra["hilt_version"]}")
+    kaptTest("com.google.dagger:hilt-android-compiler:${rootProject.extra["hilt_version"]}")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:${rootProject.extra["hilt_version"]}")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:${rootProject.extra["hilt_version"]}")
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    androidTestImplementation("androidx.test:runner:1.5.1")
 
     //HILT
     implementation("com.google.dagger:hilt-android:${rootProject.extra["hilt_version"]}")
     kapt("com.google.dagger:hilt-android-compiler:${rootProject.extra["hilt_version"]}")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
+    //BASIC
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation("androidx.activity:activity-compose:1.3.1")

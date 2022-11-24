@@ -3,7 +3,6 @@ buildscript {
     val hilt_version by extra("2.44")
     val nav_version by extra("2.5.1")
     val ktor_version by extra("2.1.3")
-    val compose_ui_version by extra("1.1.1")
     repositories {
         gradlePluginPortal()
         google()
