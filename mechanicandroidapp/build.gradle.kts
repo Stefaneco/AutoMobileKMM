@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.clientandroidapp"
+    namespace = "com.example.mechanicandroidapp"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.example.clientandroidapp"
+        applicationId = "com.example.mechanicandroidapp"
         minSdk = 21
         targetSdk = 33
         versionCode = 1

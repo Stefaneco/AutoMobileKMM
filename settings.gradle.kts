@@ -14,5 +14,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "AutoMobile"
-include(":clientAndroidApp")
 include(":shared")
+include(":mechanicandroidapp")
+include(":clientandroidapp")
