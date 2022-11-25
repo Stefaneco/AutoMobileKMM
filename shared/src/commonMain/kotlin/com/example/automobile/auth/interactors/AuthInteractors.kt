@@ -4,5 +4,6 @@ data class AuthInteractors(
     val login: Login,
     val isValidEmail: IsValidEmail,
     val isValidPassword: IsValidPassword,
-    val getSessionFromDevice: GetSessionFromDevice
+    val getSessionFromDevice: GetSessionFromDevice,
+    val resetPassword: ResetPassword
 )

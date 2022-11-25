@@ -5,4 +5,5 @@ object NavigationRoutes {
     const val LOGIN = "login"
     const val PROFILE = "profile"
     const val SPLASH = "splash"
+    const val FORGOT_PASSWORD = "forgot_password"
 }

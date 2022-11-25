@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.clientandroidapp.ui.theme.AutoMobileTheme
 import com.example.sharedandroid.auth.RegisterScreen
+import com.example.sharedandroid.auth.forgotPassword.ForgotPasswordScreen
 import com.example.sharedandroid.auth.login.LoginScreen
 import com.example.sharedandroid.auth.splash.SplashScreen
 import com.example.sharedandroid.profile.ProfileScreen
@@ -26,6 +27,7 @@ class MainActivity : ComponentActivity() {
                     composable(NavigationRoutes.SPLASH){ SplashScreen(navController = navController) }
                     composable(NavigationRoutes.PROFILE){ ProfileScreen(navController = navController) }
                     composable(NavigationRoutes.REGISTER){ RegisterScreen(navController = navController) }
+                    composable(NavigationRoutes.FORGOT_PASSWORD){ ForgotPasswordScreen(navController = navController) }
                 }
             }
         }

@@ -34,6 +34,7 @@ object MockApiEngine {
             "/api/account/login" -> respond(mockTokenResponse, HttpStatusCode.OK, responseHeaders)
             "/api/account/refresh" -> respond(mockTokenResponse, HttpStatusCode.OK, responseHeaders)
             "/api/account/register" -> respond(mockTokenResponse, HttpStatusCode.OK, responseHeaders)
+            "/api/account/recover" -> respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
             else -> {
                 error("Unhandled ${request.url.encodedPath}")
             }
@@ -53,4 +54,6 @@ object MockApiEngine {
         |"refreshToken":"refreshToken"
         |}""".trimMargin()
 
+    private val mockEmptyResponse = """
+    """.trimIndent()
 }
