@@ -23,7 +23,11 @@ class InteractorsModule {
             IsValidEmail(),
             IsValidPassword(),
             GetSessionFromDevice(sessionSource),
-            ResetPassword(accountService)
+            ResetPassword(accountService),
+            IsValidName(),
+            IsValidSurname(),
+            IsValidPhone(),
+            Register(accountService, sessionSource)
         )
     }
 }

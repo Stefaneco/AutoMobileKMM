@@ -1,6 +1,7 @@
 package com.example.automobile.auth
 
 import com.example.automobile.auth.model.LoginRequest
+import com.example.automobile.auth.model.RegisterRequest
 import com.example.automobile.auth.model.ResetPasswordRequest
 import com.example.automobile.network.IHttpRoutes
 import io.ktor.client.*
@@ -17,6 +18,13 @@ class AccountService(
         return client.post(httpRoutes.login()) {
             contentType(ContentType.Application.Json)
             setBody(loginRequest)
+        }.body()
+    }
+
+    override suspend fun register(registerRequest: RegisterRequest): HttpResponse {
+        return client.post(httpRoutes.register()) {
+            contentType(ContentType.Application.Json)
+            setBody(registerRequest)
         }.body()
     }
 
