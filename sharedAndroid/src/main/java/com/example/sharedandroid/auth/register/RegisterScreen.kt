@@ -1,4 +1,4 @@
-package com.example.sharedandroid.auth
+package com.example.sharedandroid.auth.register
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding

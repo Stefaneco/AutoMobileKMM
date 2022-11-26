@@ -17,13 +17,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.sharedandroid.R
 import com.example.sharedandroid.auth.AuthScreenState
+import com.example.sharedandroid.ui.SnackbarHost
 import com.example.sharedandroid.ui.ValidatedTextField
 import com.example.sharedandroid.util.NavigationRoutes
 
 @Composable
 fun ForgotPasswordScreen(
     viewModel: ForgotPasswordViewModel = hiltViewModel(),
-    navController: NavController
+    navController: NavController,
+    snackbarHost: SnackbarHost
 ) {
     var email by remember{ mutableStateOf("") }
     var loading = false
@@ -32,12 +34,13 @@ fun ForgotPasswordScreen(
 
     when(val state = viewModel.uiState.collectAsState().value){
         is AuthScreenState.Success -> {
-            LaunchedEffect(snackbarHostState){
+/*            LaunchedEffect(snackbarHostState){
                 snackbarHostState.showSnackbar(
                     message = context.getString(R.string.password_sent)
                 )
-            }
+            }*/
             if (!viewModel.isNavigatedOut){
+                snackbarHost.showSnackbar(context.getString(R.string.password_sent))
                 navController.navigate(NavigationRoutes.LOGIN) {
                     popUpTo(NavigationRoutes.FORGOT_PASSWORD){
                         inclusive = true

@@ -22,12 +22,14 @@ import com.example.sharedandroid.ui.ValidatedPasswordTextField
 import com.example.sharedandroid.ui.ValidatedTextField
 import com.example.sharedandroid.util.NavigationRoutes
 import com.example.automobile.R
+import com.example.sharedandroid.ui.SnackbarHost
 
 
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel(),
-    navController: NavController
+    navController: NavController,
+    snackbarHost: SnackbarHost
 )
 {
     var email by remember{ mutableStateOf("") }
@@ -47,11 +49,12 @@ fun LoginScreen(
             }
         }
         is AuthScreenState.Error -> {
-            LaunchedEffect(snackbarHostState){
+            snackbarHost.showSnackbar(state.message)
+/*            LaunchedEffect(snackbarHostState){
                 snackbarHostState.showSnackbar(
                     message = state.message
                 )
-            }
+            }*/
         }
         is AuthScreenState.Loading -> loading = true
         else -> {}
