@@ -43,9 +43,9 @@ kotlin {
         }
         val androidMain by getting{
             dependencies {
+                //KTOR
                 api("io.ktor:ktor-client-cio:${rootProject.extra["ktor_version"]}")
                 api("io.ktor:ktor-client-android:${rootProject.extra["ktor_version"]}")
-
             }
         }
         val androidTest by getting

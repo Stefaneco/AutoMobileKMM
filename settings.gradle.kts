@@ -17,3 +17,4 @@ rootProject.name = "AutoMobile"
 include(":shared")
 include(":mechanicandroidapp")
 include(":clientandroidapp")
+include(":sharedAndroid")
