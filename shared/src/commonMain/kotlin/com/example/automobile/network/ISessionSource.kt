@@ -7,4 +7,5 @@ interface ISessionSource {
 
     fun getSessionData() : SessionData
     fun updateSessionData(sessionData: SessionData)
+    fun removeSessionData()
 }

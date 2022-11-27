@@ -1,4 +1,4 @@
-package com.example.sharedandroid.auth
+package com.example.automobile.auth
 
 sealed class AuthScreenState {
     object Static : AuthScreenState()

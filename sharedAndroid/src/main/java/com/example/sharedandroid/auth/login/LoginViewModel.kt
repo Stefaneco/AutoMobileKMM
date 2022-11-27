@@ -4,7 +4,7 @@ import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.sharedandroid.auth.AuthScreenState
+import com.example.automobile.auth.AuthScreenState
 import com.example.automobile.auth.interactors.AuthInteractors
 import com.example.automobile.auth.model.LoginRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,8 +43,4 @@ class LoginViewModel @Inject constructor(
     }
 
     fun isValidPassword(password: String) = authInteractors.isValidPassword(password)
-
-    fun errorDisplayed(){
-        _uiState.value = AuthScreenState.Static
-    }
 }

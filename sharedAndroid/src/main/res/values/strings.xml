@@ -18,6 +18,11 @@
     <string name="reset_password">Reset password</string>
     <string name="surname">Surname</string>
     <string name="phone">Phone</string>
+    <string name="logout">Logout</string>
+    <string name="change_password">Change password</string>
+
+    <!--PROFILE-->
+    <string name="edit_profile">Edit profile</string>
 
     <!--ERROR-->
     <string name="bad_request">Bad Request</string>

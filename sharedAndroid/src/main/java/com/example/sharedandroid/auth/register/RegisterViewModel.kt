@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.automobile.auth.interactors.AuthInteractors
 import com.example.automobile.auth.model.RegisterRequest
-import com.example.sharedandroid.auth.AuthScreenState
+import com.example.automobile.auth.AuthScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

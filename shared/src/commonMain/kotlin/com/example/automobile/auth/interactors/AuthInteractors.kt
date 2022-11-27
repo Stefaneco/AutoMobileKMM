@@ -9,5 +9,6 @@ data class AuthInteractors(
     val isValidName: IsValidName,
     val isValidSurname: IsValidSurname,
     val isValidPhone: IsValidPhone,
-    val register: Register
+    val register: Register,
+    val logout: Logout
 )
