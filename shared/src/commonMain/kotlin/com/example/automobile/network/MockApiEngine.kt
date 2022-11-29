@@ -36,6 +36,7 @@ object MockApiEngine {
             "/api/account/register" -> respond(mockTokenResponse, HttpStatusCode.OK, responseHeaders)
             "/api/account/recover" -> respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
             "/api/user" -> respond(mockProfileResponse, HttpStatusCode.OK, responseHeaders)
+            "/api/account/change_password" ->  respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
             else -> {
                 error("Unhandled ${request.url.encodedPath}")
             }

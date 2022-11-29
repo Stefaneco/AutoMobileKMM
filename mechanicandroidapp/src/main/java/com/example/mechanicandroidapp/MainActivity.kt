@@ -14,6 +14,7 @@ import com.example.sharedandroid.auth.forgotPassword.ForgotPasswordScreen
 import com.example.sharedandroid.auth.login.LoginScreen
 import com.example.sharedandroid.auth.register.RegisterScreen
 import com.example.sharedandroid.auth.splash.SplashScreen
+import com.example.sharedandroid.profile.ChangePasswordScreen
 import com.example.sharedandroid.profile.ProfileScreen
 import com.example.sharedandroid.ui.rememberSnackbarHostState
 import com.example.sharedandroid.util.NavigationRoutes
@@ -39,6 +40,7 @@ class MainActivity : ComponentActivity() {
                         composable(NavigationRoutes.PROFILE){ ProfileScreen(navController = navController, snackbarHost = snackbarHost) }
                         composable(NavigationRoutes.REGISTER){ RegisterScreen(navController = navController, snackbarHost = snackbarHost) }
                         composable(NavigationRoutes.FORGOT_PASSWORD){ ForgotPasswordScreen(navController = navController, snackbarHost = snackbarHost) }
+                        composable(NavigationRoutes.CHANGE_PASSWORD){ ChangePasswordScreen(navController = navController, snackbarHost = snackbarHost) }
                     }
                 }
             }

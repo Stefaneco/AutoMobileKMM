@@ -20,6 +20,8 @@
     <string name="phone">Phone</string>
     <string name="logout">Logout</string>
     <string name="change_password">Change password</string>
+    <string name="new_password">New password</string>
+    <string name="old_password">Old password</string>
 
     <!--PROFILE-->
     <string name="edit_profile">Edit profile</string>

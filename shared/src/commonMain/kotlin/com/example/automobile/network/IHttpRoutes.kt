@@ -6,4 +6,5 @@ interface IHttpRoutes {
     fun register(): String
     fun resetPassword(): String
     fun getUserProfile(): String
+    fun changePassword(): String
 }

@@ -1,5 +1,6 @@
 package com.example.automobile.auth
 
+import com.example.automobile.auth.model.ChangePasswordRequest
 import com.example.automobile.auth.model.LoginRequest
 import com.example.automobile.auth.model.RegisterRequest
 import com.example.automobile.auth.model.ResetPasswordRequest
@@ -32,6 +33,13 @@ class AccountService(
         return client.post(httpRoutes.resetPassword()){
             contentType(ContentType.Application.Json)
             setBody(resetPasswordRequest)
+        }.body()
+    }
+
+    override suspend fun changePassword(changePasswordRequest: ChangePasswordRequest): HttpResponse {
+        return client.post(httpRoutes.changePassword()){
+            contentType(ContentType.Application.Json)
+            setBody(changePasswordRequest)
         }.body()
     }
 }

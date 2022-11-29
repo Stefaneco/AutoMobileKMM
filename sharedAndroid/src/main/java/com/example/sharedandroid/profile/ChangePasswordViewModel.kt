@@ -1,10 +1,10 @@
-package com.example.sharedandroid.auth.forgotPassword
+package com.example.sharedandroid.profile
 
-import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.automobile.auth.AuthScreenState
 import com.example.automobile.auth.interactors.AuthInteractors
+import com.example.automobile.auth.model.ChangePasswordRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,16 +13,17 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class ForgotPasswordViewModel @Inject constructor(
+class ChangePasswordViewModel @Inject constructor(
     private val authInteractors: AuthInteractors
-): ViewModel() {
+) : ViewModel(){
+
     private val _uiState = MutableStateFlow<AuthScreenState>(AuthScreenState.Static)
     val uiState: StateFlow<AuthScreenState> = _uiState
     var isNavigatedOut = false
 
-    fun resetPassword(email: String) {
-        if (!isValidEmail(email)) return
-        authInteractors.resetPassword(email).onEach { dataState ->
+    fun changePassword(newPassword: String, oldPassword: String) {
+        if(!areValidPasswords(newPassword, oldPassword)) return
+        authInteractors.changePassword(ChangePasswordRequest(newPassword, oldPassword)).onEach { dataState ->
             if(dataState.isLoading) _uiState.value = AuthScreenState.Loading
             else if (!dataState.message.isNullOrEmpty()){
                 _uiState.value = AuthScreenState.Error(dataState.message!!)
@@ -31,10 +32,9 @@ class ForgotPasswordViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    //Not using interactor because IDE displays error when using actual class with invoke
-    //For release swap to interactor
-    //fun isValidEmail(email: String) = authInteractors.isValidEmail(email)
-    fun isValidEmail(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    fun areValidPasswords(newPassword: String, oldPassword: String) : Boolean{
+        return (isValidPassword(newPassword) && isValidPassword(oldPassword))
     }
+
+    fun isValidPassword(password: String) = authInteractors.isValidPassword(password)
 }

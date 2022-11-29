@@ -31,7 +31,8 @@ class InteractorsModule {
             IsValidSurname(),
             IsValidPhone(),
             Register(accountService, sessionSource),
-            Logout(accountService, sessionSource)
+            Logout(accountService, sessionSource),
+            ChangePassword(accountService)
         )
     }
 
