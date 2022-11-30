@@ -1,11 +1,10 @@
-package com.example.sharedandroid.auth.forgotPassword
+package com.example.sharedandroid.profile
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
-import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -15,34 +14,30 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.sharedandroid.R
 import com.example.automobile.auth.AuthScreenState
+import com.example.sharedandroid.R
+import com.example.sharedandroid.ui.LoadingDotsAnimation
 import com.example.sharedandroid.ui.SnackbarHost
-import com.example.sharedandroid.ui.ValidatedTextField
+import com.example.sharedandroid.ui.ValidatedPasswordTextField
 import com.example.sharedandroid.util.NavigationRoutes
 
 @Composable
-fun ForgotPasswordScreen(
-    viewModel: ForgotPasswordViewModel = hiltViewModel(),
+fun ChangePasswordScreen(
+    viewModel: ChangePasswordViewModel = hiltViewModel(),
     navController: NavController,
     snackbarHost: SnackbarHost
 ) {
-    var email by remember{ mutableStateOf("") }
+    var newPassword by remember{ mutableStateOf("") }
+    var oldPassword by remember{ mutableStateOf("") }
     var loading = false
-    val snackbarHostState = SnackbarHostState()
     val context = LocalContext.current
 
     when(val state = viewModel.uiState.collectAsState().value){
         is AuthScreenState.Success -> {
-/*            LaunchedEffect(snackbarHostState){
-                snackbarHostState.showSnackbar(
-                    message = context.getString(R.string.password_sent)
-                )
-            }*/
             if (!viewModel.isNavigatedOut){
                 snackbarHost.showSnackbar(context.getString(R.string.password_sent))
-                navController.navigate(NavigationRoutes.LOGIN) {
-                    popUpTo(NavigationRoutes.FORGOT_PASSWORD){
+                navController.navigate(NavigationRoutes.PROFILE) {
+                    popUpTo(NavigationRoutes.CHANGE_PASSWORD){
                         inclusive = true
                     }
                 }
@@ -50,11 +45,7 @@ fun ForgotPasswordScreen(
             }
         }
         is AuthScreenState.Error -> {
-            LaunchedEffect(snackbarHostState){
-                snackbarHostState.showSnackbar(
-                    message = state.message
-                )
-            }
+            snackbarHost.showSnackbar(state.message)
         }
         is AuthScreenState.Loading -> loading = true
         else -> {}
@@ -65,20 +56,30 @@ fun ForgotPasswordScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ){
-        email = ValidatedTextField(
-            hint = stringResource(id = R.string.email),
-            isFieldValid = viewModel::isValidEmail,
-            errorMessage = stringResource(id = R.string.incorrect_email),
+        newPassword = ValidatedPasswordTextField(
+            hint = stringResource(id = R.string.new_password),
+            isFieldValid = viewModel::isValidPassword,
+            errorMessage = stringResource(id = R.string.incorrect_password),
+            enabled = !loading
+        )
+        oldPassword = ValidatedPasswordTextField(
+            hint = stringResource(id = R.string.old_password),
+            isFieldValid = viewModel::isValidPassword,
+            errorMessage = stringResource(id = R.string.incorrect_password),
             enabled = !loading
         )
         Button(
             modifier = Modifier.padding(5.dp),
-            enabled = !loading && viewModel.isValidEmail(email),
+            enabled = !loading && viewModel.areValidPasswords(newPassword, oldPassword),
             onClick = {
-                viewModel.resetPassword(email)
+                viewModel.changePassword(newPassword, oldPassword)
             }
         ) {
-            Text(stringResource(id = R.string.reset_password))
+            Text(stringResource(id = R.string.change_password))
         }
+        if(loading) LoadingDotsAnimation(
+            circleSize = 15.dp,
+            modifier = Modifier.padding(20.dp)
+        )
     }
 }

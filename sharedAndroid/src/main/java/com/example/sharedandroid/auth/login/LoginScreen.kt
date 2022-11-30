@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.sharedandroid.auth.AuthScreenState
+import com.example.automobile.auth.AuthScreenState
 import com.example.sharedandroid.ui.LoadingDotsAnimation
 import com.example.sharedandroid.ui.ValidatedPasswordTextField
 import com.example.sharedandroid.ui.ValidatedTextField

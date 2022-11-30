@@ -1,11 +1,12 @@
-package com.example.sharedandroid.auth.register
+package com.example.sharedandroid.profile
 
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.automobile.auth.interactors.AuthInteractors
-import com.example.automobile.auth.model.RegisterRequest
 import com.example.automobile.auth.AuthScreenState
+import com.example.automobile.auth.interactors.AuthInteractors
+import com.example.automobile.profile.interactors.ProfileInteractors
+import com.example.automobile.profile.model.UserProfile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,28 +15,27 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(
+class EditProfileViewModel @Inject constructor(
+    private val profileInteractors: ProfileInteractors,
     private val authInteractors: AuthInteractors
-) : ViewModel()  {
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<AuthScreenState>(AuthScreenState.Static)
     val uiState: StateFlow<AuthScreenState> = _uiState
     var isNavigatedOut = false
 
-    fun register(name: String, surname: String, phone: String, email: String, password: String){
-        if (!isValidRegistration(name, surname, phone, email, password)) return
-        authInteractors.register(RegisterRequest(name, surname, phone, email, password)).onEach { dataState ->
+    fun updateProfileData(name: String, surname: String, phone: String, email: String) {
+        if (!isValidUpdate(name, surname, phone, email)) return
+        profileInteractors.updateUserProfile(UserProfile(name, surname, phone, email)).onEach { dataState ->
             if(dataState.isLoading) _uiState.value = AuthScreenState.Loading
-            else if (!dataState.message.isNullOrEmpty()){
-                _uiState.value = AuthScreenState.Error(dataState.message!!)
-            }
+            else if (!dataState.message.isNullOrEmpty()) _uiState.value = AuthScreenState.Error(dataState.message!!)
             else _uiState.value = AuthScreenState.Success
         }.launchIn(viewModelScope)
     }
 
-    fun isValidRegistration(name: String, surname: String, phone: String, email: String, password: String) : Boolean{
+    fun isValidUpdate(name: String, surname: String, phone: String, email: String) : Boolean{
         return isValidName(name) && isValidEmail(email) &&
-                isValidPassword(password) && isValidPhone(phone) && isValidSurname(surname)
+                isValidSurname(surname) && isValidPhone(phone)
     }
 
     fun isValidName(name: String) = authInteractors.isValidName(name)
@@ -50,6 +50,4 @@ class RegisterViewModel @Inject constructor(
     fun isValidEmail(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
-
-    fun isValidPassword(password: String) = authInteractors.isValidPassword(password)
 }

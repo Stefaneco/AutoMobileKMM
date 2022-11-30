@@ -1,6 +1,5 @@
-package com.example.sharedandroid.auth.register
+package com.example.sharedandroid.profile
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,33 +17,36 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.sharedandroid.R
 import com.example.automobile.auth.AuthScreenState
+import com.example.sharedandroid.R
 import com.example.sharedandroid.ui.LoadingDotsAnimation
 import com.example.sharedandroid.ui.SnackbarHost
-import com.example.sharedandroid.ui.ValidatedPasswordTextField
 import com.example.sharedandroid.ui.ValidatedTextField
 import com.example.sharedandroid.util.NavigationRoutes
 
 @Composable
-fun RegisterScreen(
-    viewModel: RegisterViewModel = hiltViewModel(),
+fun EditProfileScreen(
+    viewModel: EditProfileViewModel = hiltViewModel(),
     navController: NavController,
-    snackbarHost: SnackbarHost
+    snackbarHost: SnackbarHost,
+    currentName: String?,
+    currentSurname: String?,
+    currentPhone: String?,
+    currentEmail: String?
 ) {
-    var email by remember{ mutableStateOf("") }
-    var surname by remember{ mutableStateOf("") }
-    var phone by remember{ mutableStateOf("") }
-    var password by remember{ mutableStateOf("") }
-    var name by remember{ mutableStateOf("") }
+    var name by remember{ mutableStateOf(currentName ?: "") }
+    var surname by remember{ mutableStateOf(currentSurname?: "") }
+    var phone by remember{ mutableStateOf(currentPhone?: "") }
+    var email by remember{ mutableStateOf(currentEmail?: "") }
     var loading = false
 
     when(val state = viewModel.uiState.collectAsState().value){
         is AuthScreenState.Success -> {
             if (!viewModel.isNavigatedOut){
+                snackbarHost.showSnackbar(stringResource(id = R.string.profile_updated_successfully))
                 viewModel.isNavigatedOut = true
                 navController.navigate(NavigationRoutes.PROFILE){
-                    popUpTo(NavigationRoutes.REGISTER){
+                    popUpTo(NavigationRoutes.EDIT_PROFILE){
                         inclusive = true
                     }
                 }
@@ -65,52 +67,40 @@ fun RegisterScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ){
         name = ValidatedTextField(
+            value = name,
             hint = stringResource(id = R.string.name),
             isFieldValid = viewModel::isValidName,
-            errorMessage = stringResource(id = R.string.incorrect_name),
-            enabled = !loading
+            errorMessage = stringResource(id = R.string.incorrect_name)
         )
         surname = ValidatedTextField(
+            value = surname,
             hint = stringResource(id = R.string.surname),
             isFieldValid = viewModel::isValidSurname,
-            errorMessage = stringResource(id = R.string.incorrect_surname),
-            enabled = !loading
+            errorMessage = stringResource(id = R.string.incorrect_surname)
         )
         phone = ValidatedTextField(
+            value = phone,
             hint = stringResource(id = R.string.phone),
             isFieldValid = viewModel::isValidPhone,
             errorMessage = stringResource(id = R.string.incorrect_phone),
-            enabled = !loading,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
         )
         email = ValidatedTextField(
+            value = email,
             hint = stringResource(id = R.string.email),
             isFieldValid = viewModel::isValidEmail,
-            errorMessage = stringResource(id = R.string.incorrect_email),
-            enabled = !loading
-        )
-        password = ValidatedPasswordTextField(
-            hint = stringResource(id = R.string.password),
-            isFieldValid = viewModel::isValidPassword,
-            errorMessage = stringResource(id = R.string.incorrect_password),
-            enabled = !loading
+            errorMessage = stringResource(id = R.string.incorrect_email)
         )
         Button(
             modifier = Modifier.padding(5.dp),
-            enabled = !loading && viewModel.isValidRegistration(name, surname, phone, email, password),
-            onClick = {viewModel.register(name, surname, phone, email, password)}
+            enabled = !loading && viewModel.isValidUpdate(name, surname, phone, email),
+            onClick = {viewModel.updateProfileData(name, surname, phone, email)}
         ) {
             Text(stringResource(id = R.string.register))
         }
         if(loading) LoadingDotsAnimation(
             circleSize = 15.dp,
             modifier = Modifier.padding(20.dp)
-        )
-        Text(
-            text = stringResource(id = R.string.login),
-            Modifier
-                .padding(5.dp)
-                .clickable { if (!loading) navController.navigate(NavigationRoutes.LOGIN) }
         )
     }
 }

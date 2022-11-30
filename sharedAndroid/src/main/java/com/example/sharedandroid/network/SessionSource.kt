@@ -26,4 +26,15 @@ class SessionSource(private val context: Context) : ISessionSource {
             commit()
         }
     }
+
+    override fun removeSessionData() {
+        val sharedPref = context.getSharedPreferences("com.example.automobile.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE)
+            ?: throw NoSessionException("Session not found on the device!")
+
+        with(sharedPref.edit()){
+            remove("jwt")
+            remove("refreshToken")
+            commit()
+        }
+    }
 }

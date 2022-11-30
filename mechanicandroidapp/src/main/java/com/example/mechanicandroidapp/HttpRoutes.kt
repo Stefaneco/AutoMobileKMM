@@ -8,6 +8,8 @@ class HttpRoutes : IHttpRoutes {
     val REFRESH = "$BASE_URL/account/refresh"
     val REGISTER = "$BASE_URL/account/register"
     val RESET_PASSWORD = "$BASE_URL/account/recover"
+    val USER_PROFILE = "$BASE_URL/user"
+    val CHANGE_PASSWORD = "$BASE_URL/account/change_password"
 
     override fun login(): String = LOGIN
 
@@ -16,4 +18,10 @@ class HttpRoutes : IHttpRoutes {
     override fun register(): String = REGISTER
 
     override fun resetPassword(): String = RESET_PASSWORD
+
+    override fun getUserProfile(): String = USER_PROFILE
+
+    override fun changePassword(): String = CHANGE_PASSWORD
+
+    override fun updateProfile(): String = USER_PROFILE
 }

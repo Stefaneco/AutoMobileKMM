@@ -26,12 +26,12 @@ class SplashViewModel @Inject constructor(
             try {
                 authInteractors.getSessionFromDevice()
                 withContext(Dispatchers.IO) {
-                    Thread.sleep(2000)
+                    Thread.sleep(1000)
                     _uiState.value = SplashScreenState.Success
                 }
             } catch (e: NoSessionException){
                 withContext(Dispatchers.IO) {
-                    Thread.sleep(2000)
+                    Thread.sleep(1000)
                     _uiState.value = SplashScreenState.NoSession
                 }
             } catch (e: Exception){

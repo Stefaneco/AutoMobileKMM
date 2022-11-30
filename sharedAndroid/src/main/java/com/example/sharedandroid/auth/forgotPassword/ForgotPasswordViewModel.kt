@@ -1,11 +1,10 @@
 package com.example.sharedandroid.auth.forgotPassword
 
-import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.automobile.auth.AuthScreenState
 import com.example.automobile.auth.interactors.AuthInteractors
-import com.example.sharedandroid.auth.AuthScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,12 +22,10 @@ class ForgotPasswordViewModel @Inject constructor(
 
     fun resetPassword(email: String) {
         if (!isValidEmail(email)) return
-        authInteractors.resetPassword(email).onEach {
-                dataState ->
+        authInteractors.resetPassword(email).onEach { dataState ->
             if(dataState.isLoading) _uiState.value = AuthScreenState.Loading
             else if (!dataState.message.isNullOrEmpty()){
                 _uiState.value = AuthScreenState.Error(dataState.message!!)
-                Log.e("LoginViewModel", dataState.message!!)
             }
             else _uiState.value = AuthScreenState.Success
         }.launchIn(viewModelScope)
