@@ -6,6 +6,7 @@ import com.example.automobile.network.ISessionSource
 import com.example.automobile.profile.IProfileService
 import com.example.automobile.profile.interactors.GetUserProfile
 import com.example.automobile.profile.interactors.ProfileInteractors
+import com.example.automobile.profile.interactors.UpdateUserProfile
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,7 +43,8 @@ class InteractorsModule {
         profileService: IProfileService
     ) : ProfileInteractors {
         return ProfileInteractors(
-            GetUserProfile(profileService)
+            GetUserProfile(profileService),
+            UpdateUserProfile(profileService)
         )
     }
 }

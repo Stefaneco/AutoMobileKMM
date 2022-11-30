@@ -22,4 +22,6 @@ class HttpRoutes : IHttpRoutes {
     override fun getUserProfile(): String = USER_PROFILE
 
     override fun changePassword(): String = CHANGE_PASSWORD
+
+    override fun updateProfile(): String = USER_PROFILE
 }

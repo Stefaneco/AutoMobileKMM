@@ -25,6 +25,7 @@
 
     <!--PROFILE-->
     <string name="edit_profile">Edit profile</string>
+    <string name="profile_updated_successfully">Profile updated successfully</string>
 
     <!--ERROR-->
     <string name="bad_request">Bad Request</string>

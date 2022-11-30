@@ -30,15 +30,37 @@ object MockApiEngine {
 
     private fun MockRequestHandleScope.handleSearchRequest(request: HttpRequestData): HttpResponseData {
         if (!isSuccess) return errorResponse()
-        return when (request.url.encodedPath) {
-            "/api/account/login" -> respond(mockTokenResponse, HttpStatusCode.OK, responseHeaders)
-            "/api/account/refresh" -> respond(mockTokenResponse, HttpStatusCode.OK, responseHeaders)
-            "/api/account/register" -> respond(mockTokenResponse, HttpStatusCode.OK, responseHeaders)
-            "/api/account/recover" -> respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
-            "/api/user" -> respond(mockProfileResponse, HttpStatusCode.OK, responseHeaders)
-            "/api/account/change_password" ->  respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
+        when (request.method) {
+            HttpMethod.Post -> {
+                return when (request.url.encodedPath) {
+                    "/api/account/login" -> respond(mockTokenResponse, HttpStatusCode.OK, responseHeaders)
+                    "/api/account/refresh" -> respond(mockTokenResponse, HttpStatusCode.OK, responseHeaders)
+                    "/api/account/register" -> respond(mockTokenResponse, HttpStatusCode.OK, responseHeaders)
+                    "/api/account/recover" -> respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
+                    "/api/account/change_password" ->  respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
+                    else -> {
+                        error("Unhandled ${request.url.encodedPath}")
+                    }
+                }
+            }
+            HttpMethod.Get -> {
+                return when (request.url.encodedPath) {
+                    "/api/user" -> respond(mockProfileResponse, HttpStatusCode.OK, responseHeaders)
+                    else -> {
+                        error("Unhandled ${request.url.encodedPath}")
+                    }
+                }
+            }
+            HttpMethod.Put -> {
+                return when (request.url.encodedPath) {
+                    "/api/user" -> respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
+                    else -> {
+                        error("Unhandled ${request.url.encodedPath}")
+                    }
+                }
+            }
             else -> {
-                error("Unhandled ${request.url.encodedPath}")
+                error("Unhandled ${request.method.value}")
             }
         }
     }

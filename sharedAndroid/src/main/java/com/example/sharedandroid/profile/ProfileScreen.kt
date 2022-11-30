@@ -73,7 +73,10 @@ fun ProfileScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         if(!loading) {
-            ProfileOptionButton(text = "Edit profile", icon = Icons.Rounded.Edit, onClick = {})
+            ProfileOptionButton(text = "Edit profile", icon = Icons.Rounded.Edit,
+                onClick = {
+                navController.navigate(NavigationRoutes.EDIT_PROFILE_ARGS.format(name, surname,phone,email))
+            })
             ProfileOptionButton(text = "Change password", icon = Icons.Rounded.Password,
                 onClick = {
                     navController.navigate(NavigationRoutes.CHANGE_PASSWORD)
