@@ -4,9 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.automobile.auth.AuthScreenState
 import com.example.automobile.doc.CarState
-import com.example.automobile.doc.ClientState
+import com.example.automobile.doc.CustomerState
 import com.example.automobile.doc.interactors.DocInteractors
-import com.example.automobile.doc.model.Car
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,15 +25,26 @@ class CreateDocumentViewModel @Inject constructor(
     private val _carState = MutableStateFlow<CarState>(CarState.Static)
     val carState: StateFlow<CarState> = _carState
 
-    private val _clientState = MutableStateFlow<ClientState>(ClientState.Static)
-    val clientState: StateFlow<ClientState> = _clientState
+    private val _customerState = MutableStateFlow<CustomerState>(CustomerState.Static)
+    val customerState: StateFlow<CustomerState> = _customerState
 
     fun createDocument(){
 
     }
 
-    fun getClient(){
-
+    fun getClient(phone: String){
+        if(!isValidPhoneNumber(phone)) return
+        docInteractors.getCustomerWithPhone(phone).onEach { dataState ->
+            if(dataState.isLoading) {
+                _customerState.value = CustomerState.Loading
+            }
+            else if(dataState.data != null){
+                _customerState.value = CustomerState.Success(dataState.data!!)
+            }
+            else if(!dataState.message.isNullOrEmpty()){
+                _customerState.value = CustomerState.Error(dataState.message!!)
+            }
+        }.launchIn(viewModelScope)
     }
 
     fun getCarWithVin(vin: String){

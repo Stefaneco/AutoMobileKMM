@@ -27,7 +27,6 @@ fun ValidatedTextField(
 ) : String {
     var wasFieldClicked by remember { mutableStateOf(false) }
     var wasFiledClickedOut by remember { mutableStateOf(false) }
-    var fieldValue by remember { mutableStateOf(value) }
     var displayError by remember { mutableStateOf(false) }
 
     Column() {
@@ -42,16 +41,15 @@ fun ValidatedTextField(
                     }
                     if (!it.hasFocus && wasFieldClicked) {
                         wasFiledClickedOut = true
-                        displayError = !isFieldValid(fieldValue)
+                        displayError = !isFieldValid(value)
                     }
 
                 },
-            value = fieldValue,
+            value = value,
             label = { Text(text = hint) },
             onValueChange = {
-                fieldValue = it
-                displayError = !isFieldValid(fieldValue) && wasFiledClickedOut
                 onValueChanged(it)
+                displayError = !isFieldValid(it) && wasFiledClickedOut
             },
             singleLine = isSingleLine,
             isError = displayError,
@@ -62,5 +60,5 @@ fun ValidatedTextField(
             Text(color = Color.Red,
                 text = errorMessage)
     }
-    return fieldValue
+    return value
 }

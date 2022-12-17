@@ -64,29 +64,37 @@ fun RegisterScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ){
-        name = ValidatedTextField(
+        ValidatedTextField(
+            value = name,
             hint = stringResource(id = R.string.name),
             isFieldValid = viewModel::isValidName,
             errorMessage = stringResource(id = R.string.incorrect_name),
+            onValueChanged = {name = it},
             enabled = !loading
         )
-        surname = ValidatedTextField(
+        ValidatedTextField(
+            value = surname,
             hint = stringResource(id = R.string.surname),
             isFieldValid = viewModel::isValidSurname,
             errorMessage = stringResource(id = R.string.incorrect_surname),
+            onValueChanged = {surname = it},
             enabled = !loading
         )
-        phone = ValidatedTextField(
+        ValidatedTextField(
+            value = phone,
             hint = stringResource(id = R.string.phone),
             isFieldValid = viewModel::isValidPhone,
             errorMessage = stringResource(id = R.string.incorrect_phone),
+            onValueChanged = {phone = it},
             enabled = !loading,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
         )
-        email = ValidatedTextField(
+        ValidatedTextField(
+            value = email,
             hint = stringResource(id = R.string.email),
             isFieldValid = viewModel::isValidEmail,
             errorMessage = stringResource(id = R.string.incorrect_email),
+            onValueChanged = {email = it},
             enabled = !loading
         )
         password = ValidatedPasswordTextField(

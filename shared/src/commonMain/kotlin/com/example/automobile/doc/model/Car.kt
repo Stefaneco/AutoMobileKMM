@@ -1,5 +1,8 @@
 package com.example.automobile.doc.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Car (
     val vin: String,
     val registration: String,

@@ -1,5 +1,6 @@
 package com.example.mechanicandroidapp.doc.create
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +10,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -35,17 +37,17 @@ fun CreateDocumentScreen(
     var problemDescription by remember{ mutableStateOf("") }
 
     //Car
-    var vin by remember{ mutableStateOf("") }
-    var registration by remember{ mutableStateOf("") }
-    var manufacturer by remember{ mutableStateOf("") }
-    var model by remember{ mutableStateOf("") }
-    var year by remember{ mutableStateOf("") }
+    var vin by rememberSaveable { mutableStateOf("") }
+    var registration by rememberSaveable { mutableStateOf("") }
+    var manufacturer by rememberSaveable { mutableStateOf("") }
+    var model by rememberSaveable { mutableStateOf("") }
+    var year by rememberSaveable { mutableStateOf("") }
 
     //Client
-    var email by remember{ mutableStateOf("") }
-    var surname by remember{ mutableStateOf("") }
-    var phone by remember{ mutableStateOf("") }
-    var name by remember{ mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
+    var surname by rememberSaveable { mutableStateOf("") }
+    var phone by rememberSaveable { mutableStateOf("") }
+    var name by rememberSaveable { mutableStateOf("") }
 
     var loading = false
     var carLoading = false
@@ -97,67 +99,83 @@ fun CreateDocumentScreen(
         //Start date
         startDate = DateTextField(hint = stringResource(id = R.string.start_date))
         //Problem desc
-        problemDescription = ValidatedTextField(
+        ValidatedTextField(
+            value = problemDescription,
             hint = stringResource(id = R.string.problem_description),
             isFieldValid = viewModel::isValidProblemDescription,
             errorMessage = stringResource(id = R.string.incorrect_problem_description),
             isSingleLine = false)
         //Client
         FormBlock(formTitle = stringResource(id = R.string.client)) {
-            phone = ValidatedTextField(
+            ValidatedTextField(
+                value = phone,
                 hint = stringResource(id = R.string.phone),
                 isFieldValid = viewModel::isValidPhoneNumber,
-                errorMessage = stringResource(id = R.string.incorrect_phone))
+                errorMessage = stringResource(id = R.string.incorrect_phone),
+            onValueChanged = { _phone ->
+                phone = _phone
+                viewModel.getClient(_phone)
+            })
 
-            name = ValidatedTextField(
+            ValidatedTextField(
+                value = name,
                 hint = stringResource(id = R.string.name),
                 isFieldValid = viewModel::isValidName,
-                errorMessage = stringResource(id = R.string.incorrect_name))
+                errorMessage = stringResource(id = R.string.incorrect_name),
+                onValueChanged = {name = it})
 
-            surname = ValidatedTextField(
+            ValidatedTextField(
+                value = surname,
                 hint = stringResource(id = R.string.surname),
                 isFieldValid = viewModel::isValidSurname,
-                errorMessage = stringResource(id = R.string.incorrect_surname))
+                errorMessage = stringResource(id = R.string.incorrect_surname),
+                onValueChanged = {surname = it})
 
-            email = ValidatedTextField(
+            ValidatedTextField(
+                value = email,
                 hint = stringResource(id = R.string.email),
                 isFieldValid = viewModel::isValidEmail,
-                errorMessage = stringResource(id = R.string.incorrect_email))
+                errorMessage = stringResource(id = R.string.incorrect_email),
+                onValueChanged = {email = it})
         }
         //Car
         FormBlock(formTitle = stringResource(id = R.string.car)) {
-            vin = ValidatedTextField(
+            ValidatedTextField(
                 value = vin,
                 hint = stringResource(id = R.string.vin),
                 isFieldValid = viewModel::isValidVin,
                 errorMessage = stringResource(id = R.string.incorrect_vin),
-            onValueChanged = { vin ->
-                viewModel.getCarWithVin(vin)
+                onValueChanged = { _vin ->
+                viewModel.getCarWithVin(_vin)
             })
 
-            registration = ValidatedTextField(
+            ValidatedTextField(
                 value = registration,
                 hint = stringResource(id = R.string.registration_number),
                 isFieldValid = viewModel::isValidRegistration,
-                errorMessage = stringResource(id = R.string.incorrect_registration_number))
+                errorMessage = stringResource(id = R.string.incorrect_registration_number),
+                onValueChanged = {registration = it})
 
-            manufacturer = ValidatedTextField(
+            ValidatedTextField(
                 value = manufacturer,
                 hint = stringResource(id = R.string.car_manufacturer),
                 isFieldValid = viewModel::isValidManufacturer,
-                errorMessage = stringResource(id = R.string.incorrect_car_manufacturer))
+                errorMessage = stringResource(id = R.string.incorrect_car_manufacturer),
+                onValueChanged = {manufacturer = it})
 
-            model = ValidatedTextField(
+            ValidatedTextField(
                 value = model,
                 hint = stringResource(id = R.string.car_model),
                 isFieldValid = viewModel::isValidModel,
-                errorMessage = stringResource(id = R.string.incorrect_car_model))
+                errorMessage = stringResource(id = R.string.incorrect_car_model),
+                onValueChanged = {model = it})
 
-            year = ValidatedTextField(
+            ValidatedTextField(
                 value = year,
                 hint = stringResource(id = R.string.car_year),
                 isFieldValid = viewModel::isValidYear,
-                errorMessage = stringResource(id = R.string.incorrect_car_year))
+                errorMessage = stringResource(id = R.string.incorrect_car_year),
+                onValueChanged = {year = it})
         }
 
         Button(
@@ -170,6 +188,5 @@ fun CreateDocumentScreen(
             Text(stringResource(id = R.string.create_document))
         }
     }
-
 
 }

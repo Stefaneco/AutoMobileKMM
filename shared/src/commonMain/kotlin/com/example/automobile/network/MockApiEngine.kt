@@ -46,7 +46,7 @@ object MockApiEngine {
             HttpMethod.Get -> {
                 return when (request.url.encodedPath) {
                     "/api/user" -> respond(mockProfileResponse, HttpStatusCode.OK, responseHeaders)
-                    "/api/car" -> respond(mockCarResponse, HttpStatusCode.OK, responseHeaders)
+                    "/api/car" -> { respond(mockCarResponse, HttpStatusCode.OK, responseHeaders) }
                     "/api/customer" -> respond(mockProfileResponse, HttpStatusCode.OK, responseHeaders)
                     else -> {
                         error("Unhandled ${request.url.encodedPath}")
@@ -90,11 +90,11 @@ object MockApiEngine {
         "email":"andrzej@testowy.com"  
     }""".trimMargin()
 
-    private val mockCarResponse = """
+    private val mockCarResponse = """{
         "vin":"VIN1234567890VIN1",
         "registration": "RJA2137P",
         "manufacturer": "Toyota",
         "model": "Rav4",
         "year": 2018
-    """.trimIndent()
+    }""".trimMargin()
 }

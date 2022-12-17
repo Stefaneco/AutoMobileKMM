@@ -14,7 +14,8 @@ class GetCarWithVin(
         emit(RequestState.loading())
         try {
             val carResponse = docService.getCarWithVin(vin)
-            emit(RequestState.data(carResponse.body()))
+            println("CreateDoc OK, " + carResponse.body())
+            emit(RequestState.data(data = carResponse.body()))
         } catch (e: Exception){
             emit(RequestState.error(e.message ?: "Unknown Error"))
         }
