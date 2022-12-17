@@ -22,7 +22,8 @@ fun ValidatedTextField(
     enabled: Boolean = true,
     onValueChanged: (String) -> Unit = {},
     value: String = "",
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    isSingleLine: Boolean = true
 ) : String {
     var wasFieldClicked by remember { mutableStateOf(false) }
     var wasFiledClickedOut by remember { mutableStateOf(false) }
@@ -52,7 +53,7 @@ fun ValidatedTextField(
                 displayError = !isFieldValid(fieldValue) && wasFiledClickedOut
                 onValueChanged(it)
             },
-            singleLine = true,
+            singleLine = isSingleLine,
             isError = displayError,
             enabled = enabled,
             keyboardOptions = keyboardOptions

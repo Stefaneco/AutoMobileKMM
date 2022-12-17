@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mechanicandroidapp.doc.create.CreateDocumentScreen
 import com.example.mechanicandroidapp.ui.theme.AutoMobileTheme
 import com.example.sharedandroid.auth.forgotPassword.ForgotPasswordScreen
 import com.example.sharedandroid.auth.login.LoginScreen
@@ -33,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     NavHost(
                         modifier = Modifier.padding(padding),
                         navController = navController,
-                        startDestination = NavigationRoutes.SPLASH
+                        startDestination = NavigationRoutes.CREATE_DOCUMENT
                     )
                     {
                         composable(NavigationRoutes.LOGIN){ LoginScreen(navController = navController, snackbarHost = snackbarHost) }
@@ -53,6 +54,10 @@ class MainActivity : ComponentActivity() {
                                 currentPhone = backStackEntry.arguments?.getString("phone")
                             )
                         }
+                        composable(NavigationRoutes.CREATE_DOCUMENT) { CreateDocumentScreen(
+                            navController = navController,
+                            snackbarHost = snackbarHost
+                        )}
                     }
                 }
             }

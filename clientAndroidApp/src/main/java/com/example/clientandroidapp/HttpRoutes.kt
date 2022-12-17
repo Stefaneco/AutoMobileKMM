@@ -16,4 +16,23 @@ class HttpRoutes : IHttpRoutes {
     override fun register(): String = REGISTER
 
     override fun resetPassword(): String = RESET_PASSWORD
+    override fun getUserProfile(): String {
+        TODO("Not yet implemented")
+    }
+
+    override fun changePassword(): String {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateProfile(): String {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCarWithVin(): String {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCustomerWithPhone(): String {
+        TODO("Not yet implemented")
+    }
 }

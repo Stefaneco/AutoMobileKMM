@@ -2,6 +2,10 @@ package com.example.mechanicandroidapp.di
 
 import com.example.automobile.auth.IAccountService
 import com.example.automobile.auth.interactors.*
+import com.example.automobile.doc.IDocService
+import com.example.automobile.doc.interactors.DocInteractors
+import com.example.automobile.doc.interactors.GetCarWithVin
+import com.example.automobile.doc.interactors.GetCustomerWithPhone
 import com.example.automobile.network.ISessionSource
 import com.example.automobile.profile.IProfileService
 import com.example.automobile.profile.interactors.GetUserProfile
@@ -45,6 +49,17 @@ class InteractorsModule {
         return ProfileInteractors(
             GetUserProfile(profileService),
             UpdateUserProfile(profileService)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideDocInteractors(
+        docService: IDocService
+    ) : DocInteractors {
+        return DocInteractors(
+            GetCarWithVin(docService),
+            GetCustomerWithPhone(docService)
         )
     }
 }

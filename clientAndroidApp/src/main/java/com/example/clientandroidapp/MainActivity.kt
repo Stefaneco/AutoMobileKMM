@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     {
                         composable(NavigationRoutes.LOGIN){ LoginScreen(navController = navController, snackbarHost = snackbarHost) }
                         composable(NavigationRoutes.SPLASH){ SplashScreen(navController = navController) }
-                        composable(NavigationRoutes.PROFILE){ ProfileScreen(navController = navController) }
+                        composable(NavigationRoutes.PROFILE){ ProfileScreen(navController = navController, snackbarHost = snackbarHost) }
                         composable(NavigationRoutes.REGISTER){ RegisterScreen(navController = navController, snackbarHost = snackbarHost) }
                         composable(NavigationRoutes.FORGOT_PASSWORD){ ForgotPasswordScreen(navController = navController, snackbarHost = snackbarHost) }
                     }

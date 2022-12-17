@@ -9,4 +9,10 @@ object NavigationRoutes {
     const val CHANGE_PASSWORD = "change_password"
     const val EDIT_PROFILE = "edit_profile/{name}/{surname}/{phone}/{email}"
     const val EDIT_PROFILE_ARGS = "edit_profile/%s/%s/%s/%s"
+
+    const val DOCUMENT_LIST = "document_list"
+
+    //MECHANIC
+    const val CREATE_DOCUMENT = "create_document"
+
 }
