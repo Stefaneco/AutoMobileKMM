@@ -15,4 +15,5 @@ interface IHttpRoutes {
     //DOC
     fun getCarWithVin(): String
     fun getCustomerWithPhone(): String
+    fun createDoc(): String
 }

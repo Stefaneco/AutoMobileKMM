@@ -38,6 +38,7 @@ object MockApiEngine {
                     "/api/account/register" -> respond(mockTokenResponse, HttpStatusCode.OK, responseHeaders)
                     "/api/account/recover" -> respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
                     "/api/account/change_password" ->  respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
+                    "/api/repair" -> respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
                     else -> {
                         error("Unhandled ${request.url.encodedPath}")
                     }
@@ -91,7 +92,7 @@ object MockApiEngine {
     }""".trimMargin()
 
     private val mockCarResponse = """{
-        "vin":"VIN1234567890VIN1",
+        "vin":"VNN1234567890VNN1",
         "registration": "RJA2137P",
         "manufacturer": "Toyota",
         "model": "Rav4",

@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     NavHost(
                         modifier = Modifier.padding(padding),
                         navController = navController,
-                        startDestination = NavigationRoutes.SPLASH
+                        startDestination = NavigationRoutes.CREATE_DOCUMENT
                     )
                     {
                         composable(NavigationRoutes.LOGIN){ LoginScreen(navController = navController, snackbarHost = snackbarHost) }

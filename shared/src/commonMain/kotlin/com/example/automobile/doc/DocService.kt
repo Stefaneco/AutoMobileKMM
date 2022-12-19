@@ -1,5 +1,6 @@
 package com.example.automobile.doc
 
+import com.example.automobile.doc.model.CreateDocRequest
 import com.example.automobile.network.IHttpRoutes
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -19,9 +20,16 @@ class DocService(
     }
 
     override suspend fun getClientWithPhone(phone: String): HttpResponse {
-        return client.get(httpRoutes.getCarWithVin()){
+        return client.get(httpRoutes.getCustomerWithPhone()){
             contentType(ContentType.Application.Json)
             setBody(phone)
+        }.body()
+    }
+
+    override suspend fun createDoc(createDocRequest: CreateDocRequest): HttpResponse {
+        return client.post(httpRoutes.createDoc()){
+            contentType(ContentType.Application.Json)
+            setBody(createDocRequest)
         }.body()
     }
 }
