@@ -32,4 +32,8 @@ class DocService(
             setBody(createDocRequest)
         }.body()
     }
+
+    override suspend fun getDocs(): HttpResponse {
+        return client.get(httpRoutes.getDocs()).body()
+    }
 }

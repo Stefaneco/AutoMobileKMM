@@ -49,6 +49,7 @@ object MockApiEngine {
                     "/api/user" -> respond(mockProfileResponse, HttpStatusCode.OK, responseHeaders)
                     "/api/car" -> { respond(mockCarResponse, HttpStatusCode.OK, responseHeaders) }
                     "/api/customer" -> respond(mockProfileResponse, HttpStatusCode.OK, responseHeaders)
+                    "/api/repair" -> respond(mockDocsResponse, HttpStatusCode.OK, responseHeaders)
                     else -> {
                         error("Unhandled ${request.url.encodedPath}")
                     }
@@ -98,4 +99,37 @@ object MockApiEngine {
         "model": "Rav4",
         "year": 2018
     }""".trimMargin()
+
+    private val mockDocsResponse = """
+        [{
+        "id":1,
+        "startDate":"26.01.2022",
+        "endDate":"28.01.2022",
+        "name": "Andrzej",
+        "surname": "Sękiewicz",
+        "manufacturer":"Toyota",
+        "model": "Rav4",
+        "year": 2018
+        },
+        {
+        "id":2,
+        "startDate":"11.02.2022",
+        "endDate":"16.02.2022",
+        "name": "Andrzej",
+        "surname": "Sękiewicz",
+        "manufacturer":"Toyota",
+        "model": "Rav4",
+        "year": 2018
+        },
+        {
+        "id":3,
+        "startDate":"04.02.2022",
+        "endDate":"05.02.2022",
+        "name": "Bartosz",
+        "surname": "Przygoda",
+        "manufacturer":"Bmw",
+        "model": "e36",
+        "year": 1998
+        }]
+    """.trimIndent()
 }

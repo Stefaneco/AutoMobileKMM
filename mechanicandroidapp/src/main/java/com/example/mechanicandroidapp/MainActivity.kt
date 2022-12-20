@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mechanicandroidapp.doc.create.CreateDocumentScreen
+import com.example.mechanicandroidapp.doc.list.DocumentListScreenMechanic
 import com.example.mechanicandroidapp.ui.theme.AutoMobileTheme
 import com.example.sharedandroid.auth.forgotPassword.ForgotPasswordScreen
 import com.example.sharedandroid.auth.login.LoginScreen
@@ -34,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     NavHost(
                         modifier = Modifier.padding(padding),
                         navController = navController,
-                        startDestination = NavigationRoutes.CREATE_DOCUMENT
+                        startDestination = NavigationRoutes.DOCUMENT_LIST
                     )
                     {
                         composable(NavigationRoutes.LOGIN){ LoginScreen(navController = navController, snackbarHost = snackbarHost) }
@@ -43,8 +44,7 @@ class MainActivity : ComponentActivity() {
                         composable(NavigationRoutes.REGISTER){ RegisterScreen(navController = navController, snackbarHost = snackbarHost) }
                         composable(NavigationRoutes.FORGOT_PASSWORD){ ForgotPasswordScreen(navController = navController, snackbarHost = snackbarHost) }
                         composable(NavigationRoutes.CHANGE_PASSWORD){ ChangePasswordScreen(navController = navController, snackbarHost = snackbarHost) }
-                        composable(NavigationRoutes.EDIT_PROFILE) {
-                            backStackEntry ->
+                        composable(NavigationRoutes.EDIT_PROFILE) { backStackEntry ->
                             EditProfileScreen(
                                 navController = navController,
                                 snackbarHost = snackbarHost,
@@ -58,6 +58,18 @@ class MainActivity : ComponentActivity() {
                             navController = navController,
                             snackbarHost = snackbarHost
                         )}
+                        composable(NavigationRoutes.DOCUMENT_LIST) { DocumentListScreenMechanic(
+                            navController = navController,
+                            snackbarHost = snackbarHost
+                        )}
+                        composable(NavigationRoutes.DOCUMENT_DETAILS) { backStackEntry ->
+
+
+                        }
+                        composable(NavigationRoutes.EDIT_DOCUMENT) { backStackEntry ->
+
+
+                        }
                     }
                 }
             }

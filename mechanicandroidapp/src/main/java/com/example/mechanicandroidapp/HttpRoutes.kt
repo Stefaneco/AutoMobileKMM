@@ -13,6 +13,7 @@ class HttpRoutes : IHttpRoutes {
     val GET_CAR_WITH_VIN = "$BASE_URL/car"
     val GET_CUSTOMER_WITH_PHONE = "$BASE_URL/customer"
     val CREATE_DOC = "$BASE_URL/repair"
+    val GET_DOCS = "$BASE_URL/repair"
 
     override fun login(): String = LOGIN
 
@@ -33,6 +34,8 @@ class HttpRoutes : IHttpRoutes {
     override fun getCustomerWithPhone(): String = GET_CUSTOMER_WITH_PHONE
 
     override fun createDoc(): String = CREATE_DOC
+
+    override fun getDocs(): String = GET_DOCS
 
 
 }

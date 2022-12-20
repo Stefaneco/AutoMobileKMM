@@ -8,5 +8,6 @@ data class DocInteractors (
     val isValidVin: IsValidVin,
     val isValidRegistration: IsValidRegistration,
     val isValidProblemDescription: IsValidProblemDescription,
-    val createDoc: CreateDoc
+    val createDoc: CreateDoc,
+    val getDocs: GetDocs
         )

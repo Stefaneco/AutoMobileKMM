@@ -63,7 +63,8 @@ class InteractorsModule {
             IsValidVin(),
             IsValidRegistration(),
             IsValidProblemDescription(),
-            CreateDoc(docService)
+            CreateDoc(docService),
+            GetDocs(docService)
         )
     }
 }
