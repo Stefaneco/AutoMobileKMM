@@ -38,7 +38,7 @@ fun SplashScreen(
     when(val state = viewModel.uiState.collectAsState().value){
         is SplashScreenState.Success -> {
             if (!viewModel.isNavigatedOut){
-                navController.navigate(NavigationRoutes.DOCUMENT_LIST) {
+                navController.navigate(NavigationRoutes.MAIN_GRAPH) {
                     popUpTo(NavigationRoutes.SPLASH){
                         inclusive = true
                     }

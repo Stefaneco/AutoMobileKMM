@@ -2,6 +2,8 @@ package com.example.clientandroidapp.di
 
 import com.example.automobile.auth.IAccountService
 import com.example.automobile.auth.interactors.*
+import com.example.automobile.doc.IDocService
+import com.example.automobile.doc.interactors.*
 import com.example.automobile.network.ISessionSource
 import com.example.automobile.profile.IProfileService
 import com.example.automobile.profile.interactors.GetUserProfile
@@ -45,6 +47,24 @@ class InteractorsModule {
         return ProfileInteractors(
             GetUserProfile(profileService),
             UpdateUserProfile(profileService)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideDocInteractors(
+        docService: IDocService
+    ) : DocInteractors {
+        return DocInteractors(
+            GetCarWithVin(docService),
+            GetCustomerWithPhone(docService),
+            IsValidManufacturer(),
+            IsValidModel(),
+            IsValidVin(),
+            IsValidRegistration(),
+            IsValidProblemDescription(),
+            CreateDoc(docService),
+            GetDocs(docService)
         )
     }
 }

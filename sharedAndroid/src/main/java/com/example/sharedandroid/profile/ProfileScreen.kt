@@ -25,8 +25,8 @@ import com.example.sharedandroid.util.NavigationRoutes
 @Composable
 fun ProfileScreen(
     viewModel: ProfileViewModel = hiltViewModel(),
-    navController: NavController,
-    snackbarHost: SnackbarHost
+    snackbarHost: SnackbarHost,
+    navController: NavController
 ) {
     var email by remember{ mutableStateOf("") }
     var name by remember{ mutableStateOf("") }

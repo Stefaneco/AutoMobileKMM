@@ -8,6 +8,10 @@ class HttpRoutes : IHttpRoutes {
     val REFRESH = "$BASE_URL/account/refresh"
     val REGISTER = "$BASE_URL/account/register"
     val RESET_PASSWORD = "$BASE_URL/account/recover"
+    val USER_PROFILE = "$BASE_URL/user"
+    val CHANGE_PASSWORD = "$BASE_URL/account/change_password"
+    val CREATE_DOC = "$BASE_URL/repair"
+    val GET_DOCS = "$BASE_URL/repair"
 
     override fun login(): String = LOGIN
 
@@ -16,13 +20,10 @@ class HttpRoutes : IHttpRoutes {
     override fun register(): String = REGISTER
 
     override fun resetPassword(): String = RESET_PASSWORD
-    override fun getUserProfile(): String {
-        TODO("Not yet implemented")
-    }
 
-    override fun changePassword(): String {
-        TODO("Not yet implemented")
-    }
+    override fun getUserProfile(): String = USER_PROFILE
+
+    override fun changePassword(): String = CHANGE_PASSWORD
 
     override fun updateProfile(): String {
         TODO("Not yet implemented")
@@ -35,4 +36,10 @@ class HttpRoutes : IHttpRoutes {
     override fun getCustomerWithPhone(): String {
         TODO("Not yet implemented")
     }
+
+    override fun createDoc(): String {
+        TODO("Not yet implemented")
+    }
+
+    override fun getDocs(): String = GET_DOCS
 }

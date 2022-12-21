@@ -40,7 +40,7 @@ fun LoginScreen(
     when(val state = viewModel.uiState.collectAsState().value){
         is AuthScreenState.Success -> {
             if (!viewModel.isNavigatedOut){
-                navController.navigate(NavigationRoutes.PROFILE) {
+                navController.navigate(NavigationRoutes.MAIN_GRAPH) {
                     popUpTo(NavigationRoutes.LOGIN){
                         inclusive = true
                     }

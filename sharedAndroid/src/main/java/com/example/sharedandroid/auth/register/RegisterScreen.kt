@@ -43,7 +43,7 @@ fun RegisterScreen(
         is AuthScreenState.Success -> {
             if (!viewModel.isNavigatedOut){
                 viewModel.isNavigatedOut = true
-                navController.navigate(NavigationRoutes.PROFILE){
+                navController.navigate(NavigationRoutes.MAIN_GRAPH){
                     popUpTo(NavigationRoutes.REGISTER){
                         inclusive = true
                     }
