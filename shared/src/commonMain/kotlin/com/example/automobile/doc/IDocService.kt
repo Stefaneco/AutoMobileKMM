@@ -9,4 +9,5 @@ interface IDocService {
     suspend fun getClientWithPhone(phone: String) : HttpResponse
     suspend fun createDoc(createDocRequest: CreateDocRequest) : HttpResponse
     suspend fun getDocs(): HttpResponse
+    suspend fun getDoc(id: Int): HttpResponse
 }

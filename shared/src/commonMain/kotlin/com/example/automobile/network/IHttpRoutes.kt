@@ -17,4 +17,5 @@ interface IHttpRoutes {
     fun getCustomerWithPhone(): String
     fun createDoc(): String
     fun getDocs(): String
+    fun getDoc(id: Int): String
 }

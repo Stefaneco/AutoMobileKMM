@@ -1,20 +1,20 @@
 package com.example.automobile.doc.interactors
 
 import com.example.automobile.doc.IDocService
-import com.example.automobile.doc.model.DocListItem
+import com.example.automobile.doc.model.RepairDocument
 import com.example.automobile.network.model.RequestState
 import io.ktor.client.call.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetDocs(
+class GetDoc(
     private val docService: IDocService
 ) {
-    operator fun invoke(): Flow<RequestState<List<DocListItem>>> = flow {
+    operator fun invoke(id: Int): Flow<RequestState<RepairDocument>> = flow {
         emit(RequestState.loading())
         try {
-            val docsResponse = docService.getDocs()
-            emit(RequestState.data(data = docsResponse.body()))
+            val docResponse = docService.getDoc(id)
+            emit(RequestState.data(data = docResponse.body()))
         } catch (e: Exception){
             emit(RequestState.error(e.message ?: "Unknown Error"))
         }

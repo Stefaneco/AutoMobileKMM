@@ -24,6 +24,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.example.mechanicandroidapp.doc.create.CreateDocumentScreen
+import com.example.mechanicandroidapp.doc.detail.DocumentDetailScreenMechanic
 import com.example.mechanicandroidapp.doc.list.DocumentListScreenMechanic
 import com.example.mechanicandroidapp.ui.theme.AutoMobileTheme
 import com.example.sharedandroid.auth.forgotPassword.ForgotPasswordScreen
@@ -48,8 +49,11 @@ class MainActivity : ComponentActivity() {
                 val snackbarHost = rememberSnackbarHostState()
                 val navController = rememberNavController()
                 val mainNavController = rememberNavController()
-                NavHost(navController = navController, startDestination = NavigationRoutes.AUTH_GRAPH){
-                    authNavGraph(authNavController = navController, snackbarHost = snackbarHost)
+                NavHost(navController = navController, startDestination = NavigationRoutes.SPLASH){
+                    composable(NavigationRoutes.FORGOT_PASSWORD){ ForgotPasswordScreen(navController = navController, snackbarHost = snackbarHost) }
+                    composable(NavigationRoutes.LOGIN){ LoginScreen(navController = navController, snackbarHost = snackbarHost) }
+                    composable(NavigationRoutes.SPLASH){ SplashScreen(navController = navController) }
+                    composable(NavigationRoutes.REGISTER){ RegisterScreen(navController = navController, snackbarHost = snackbarHost) }
                     composable(NavigationRoutes.MAIN_GRAPH){
                         MainNavGraph(
                             snackbarHost = snackbarHost,
@@ -57,8 +61,10 @@ class MainActivity : ComponentActivity() {
                             mainNavController = mainNavController)
                     }
                     composable(NavigationRoutes.DOCUMENT_DETAILS) { backStackEntry ->
-
-
+                        DocumentDetailScreenMechanic(
+                            navController = navController,
+                            snackbarHost = snackbarHost,
+                            docId = backStackEntry.arguments?.getString("docId"))
                     }
                     composable(NavigationRoutes.EDIT_DOCUMENT) { backStackEntry ->
 
@@ -109,15 +115,15 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun NavGraphBuilder.authNavGraph(authNavController: NavHostController, snackbarHost: SnackbarHost) {
+    private fun NavGraphBuilder.authNavGraph(navController: NavHostController, snackbarHost: SnackbarHost) {
         navigation(
             route = NavigationRoutes.AUTH_GRAPH,
             startDestination = NavigationRoutes.SPLASH
         ){
-            composable(NavigationRoutes.FORGOT_PASSWORD){ ForgotPasswordScreen(navController = authNavController, snackbarHost = snackbarHost) }
-            composable(NavigationRoutes.LOGIN){ LoginScreen(navController = authNavController, snackbarHost = snackbarHost) }
-            composable(NavigationRoutes.SPLASH){ SplashScreen(navController = authNavController) }
-            composable(NavigationRoutes.REGISTER){ RegisterScreen(navController = authNavController, snackbarHost = snackbarHost) }
+            composable(NavigationRoutes.FORGOT_PASSWORD){ ForgotPasswordScreen(navController = navController, snackbarHost = snackbarHost) }
+            composable(NavigationRoutes.LOGIN){ LoginScreen(navController = navController, snackbarHost = snackbarHost) }
+            composable(NavigationRoutes.SPLASH){ SplashScreen(navController = navController) }
+            composable(NavigationRoutes.REGISTER){ RegisterScreen(navController = navController, snackbarHost = snackbarHost) }
         }
     }
 

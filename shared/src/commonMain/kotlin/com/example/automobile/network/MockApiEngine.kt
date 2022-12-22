@@ -50,6 +50,7 @@ object MockApiEngine {
                     "/api/car" -> { respond(mockCarResponse, HttpStatusCode.OK, responseHeaders) }
                     "/api/customer" -> respond(mockProfileResponse, HttpStatusCode.OK, responseHeaders)
                     "/api/repair" -> respond(mockDocsResponse, HttpStatusCode.OK, responseHeaders)
+                    "/api/repair/1" -> respond(mockDocResponse, HttpStatusCode.OK, responseHeaders)
                     else -> {
                         error("Unhandled ${request.url.encodedPath}")
                     }
@@ -99,6 +100,49 @@ object MockApiEngine {
         "model": "Rav4",
         "year": 2018
     }""".trimMargin()
+
+    private val mockDocResponse = """
+        {
+        "id":1,
+        "startDate":"26.01.2022",
+        "endDate":"28.01.2022",
+        "problem_description": "Lorem ipsum dolor sit amet. Et internos Quis aut sapiente rerum hic corrupti nemo vel corporis recusandae et ipsa nostrum! Et dolor dolorem et omnis similique nam officia nulla aut nemo minima aut perferendis magni aut molestiae nihil.",
+        "repair_description": "Non nulla adipisci ut dolores quia ut dolorum sint sed delectus quia ea sunt necessitatibus. Vel rerum asperiores ut voluptatem asperiores aut commodi rerum ut praesentium quod? Ex ipsam ducimus eum odit officiis ea maiores quis id cumque soluta ut ipsum minus.",
+        "mechanic": {
+            "name": "Hubert",
+            "surname": "Abramowicz",
+            "phone": "123456789",
+            "email": "Hubi@garage.com"
+        },
+        "customer": {
+            "name": "Andrzej",
+            "surname": "Sękiewicz",
+            "phone": "987654321",
+            "email": "Andrzej@testowy.com"
+        },
+        "car": {
+            "vin":"VNN1234567890VNN1",
+            "registration": "RJA2137P",
+            "manufacturer":"Toyota",
+            "model": "Rav4",
+            "year": 2018
+        },
+        "parts": [
+            {
+                "name": "Klocki hamulcowe",
+                "manufacturer": "Bosch",
+                "catalog_number": "EFH43111",
+                "isNew": true
+            },
+            {
+                "name": "Olej",
+                "manufacturer": "Castrol",
+                "catalog_number": "OIL2137",
+                "isNew": true
+            }
+        ]
+        }
+    """.trimIndent()
 
     private val mockDocsResponse = """
         [{

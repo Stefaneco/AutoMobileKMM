@@ -5,6 +5,8 @@
     <string name="cancel">Cancel</string>
     <string name="drop_down">Show section</string>
     <string name="drop_up">Hide section</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <!--AUTH-->
     <string name="email">Email</string>
@@ -61,4 +63,7 @@
     <string name="incorrect_car_year">Incorrect Year</string>
     <string name="incorrect_car_model">Incorrect Model</string>
     <string name="incorrect_car_manufacturer">Incorrect Manufacturer</string>
+    <string name="replaced_parts">Replaced Parts</string>
+    <string name="is_new_part">Is new</string>
+
 </resources>

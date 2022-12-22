@@ -42,4 +42,7 @@ class HttpRoutes : IHttpRoutes {
     }
 
     override fun getDocs(): String = GET_DOCS
+    override fun getDoc(id: Int): String {
+        TODO("Not yet implemented")
+    }
 }

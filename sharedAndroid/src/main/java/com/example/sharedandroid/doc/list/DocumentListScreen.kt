@@ -23,7 +23,7 @@ fun DocumentListScreen(
 
     when(val state = viewModel.uiState.collectAsState().value) {
         is DocListScreenState.Loading -> {
-            DocListLoading()
+            ScreenLoading()
         }
         is DocListScreenState.Success -> {
             DocList(docs = state.docListItems, navController)
@@ -60,7 +60,7 @@ fun DocList(docs: List<DocListItem>, navController: NavController){
 }
 
 @Composable
-fun DocListLoading(){
+fun ScreenLoading(){
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
