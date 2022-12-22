@@ -3,6 +3,7 @@ package com.example.mechanicandroidapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -48,44 +49,90 @@ class MainActivity : ComponentActivity() {
             AutoMobileTheme {
                 val snackbarHost = rememberSnackbarHostState()
                 val navController = rememberNavController()
-                val mainNavController = rememberNavController()
-                NavHost(navController = navController, startDestination = NavigationRoutes.SPLASH){
-                    composable(NavigationRoutes.FORGOT_PASSWORD){ ForgotPasswordScreen(navController = navController, snackbarHost = snackbarHost) }
-                    composable(NavigationRoutes.LOGIN){ LoginScreen(navController = navController, snackbarHost = snackbarHost) }
-                    composable(NavigationRoutes.SPLASH){ SplashScreen(navController = navController) }
-                    composable(NavigationRoutes.REGISTER){ RegisterScreen(navController = navController, snackbarHost = snackbarHost) }
-                    composable(NavigationRoutes.MAIN_GRAPH){
-                        MainNavGraph(
-                            snackbarHost = snackbarHost,
-                            navController = navController,
-                            mainNavController = mainNavController)
-                    }
-                    composable(NavigationRoutes.DOCUMENT_DETAILS) { backStackEntry ->
-                        DocumentDetailScreenMechanic(
-                            navController = navController,
-                            snackbarHost = snackbarHost,
-                            docId = backStackEntry.arguments?.getString("docId"))
-                    }
-                    composable(NavigationRoutes.EDIT_DOCUMENT) { backStackEntry ->
 
-
-                    }
-                    composable(NavigationRoutes.CHANGE_PASSWORD){ ChangePasswordScreen(navController = navController, snackbarHost = snackbarHost) }
-                    composable(NavigationRoutes.EDIT_PROFILE) { backStackEntry ->
-                        EditProfileScreen(
-                            navController = navController,
-                            snackbarHost = snackbarHost,
-                            currentName = backStackEntry.arguments?.getString("name"),
-                            currentSurname = backStackEntry.arguments?.getString("surname"),
-                            currentEmail = backStackEntry.arguments?.getString("email"),
-                            currentPhone = backStackEntry.arguments?.getString("phone")
-                        )
-                    }
-                    composable(NavigationRoutes.CREATE_DOCUMENT) { CreateDocumentScreen(
+                Scaffold(scaffoldState = snackbarHost.scaffoldState) { padding ->
+                    NavHost(
+                        modifier = Modifier.padding(padding),
                         navController = navController,
-                        snackbarHost = snackbarHost
-                    )}
+                        startDestination = NavigationRoutes.SPLASH){
 
+                        composable(NavigationRoutes.PROFILE){
+                            BottomNavBarWrapper(navController = navController, snackbarHost = snackbarHost) {
+                                ProfileScreen(snackbarHost = snackbarHost, navController = navController)
+                            }
+                        }
+/*                        composable(NavigationRoutes.PROFILE){
+                            ProfileScreen(
+                                snackbarHost = snackbarHost,
+                                navController = navController
+                            )
+                        }*/
+                        composable(NavigationRoutes.DOCUMENT_LIST) {
+                            BottomNavBarWrapper(navController = navController, snackbarHost = snackbarHost) {
+                                DocumentListScreenMechanic(
+                                    navController = navController,
+                                    snackbarHost = snackbarHost
+                                )
+                            }
+                        }
+
+                        composable(NavigationRoutes.FORGOT_PASSWORD){
+                            ForgotPasswordScreen(
+                                navController = navController,
+                                snackbarHost = snackbarHost
+                            )
+                        }
+                        composable(NavigationRoutes.LOGIN){
+                            LoginScreen(
+                                navController = navController,
+                                snackbarHost = snackbarHost
+                            )
+                        }
+                        composable(NavigationRoutes.SPLASH){
+                            SplashScreen(
+                                navController = navController
+                            )
+                        }
+                        composable(NavigationRoutes.REGISTER){
+                            RegisterScreen(
+                                navController = navController,
+                                snackbarHost = snackbarHost
+                            )
+                        }
+                        composable(NavigationRoutes.DOCUMENT_DETAILS) { backStackEntry ->
+                            DocumentDetailScreenMechanic(
+                                navController = navController,
+                                snackbarHost = snackbarHost,
+                                docId = backStackEntry.arguments?.getString("docId")
+                            )
+                        }
+                        composable(NavigationRoutes.EDIT_DOCUMENT) { backStackEntry ->
+
+
+                        }
+                        composable(NavigationRoutes.CHANGE_PASSWORD){
+                            ChangePasswordScreen(
+                                navController = navController,
+                                snackbarHost = snackbarHost
+                            )
+                        }
+                        composable(NavigationRoutes.EDIT_PROFILE) { backStackEntry ->
+                            EditProfileScreen(
+                                navController = navController,
+                                snackbarHost = snackbarHost,
+                                currentName = backStackEntry.arguments?.getString("name"),
+                                currentSurname = backStackEntry.arguments?.getString("surname"),
+                                currentEmail = backStackEntry.arguments?.getString("email"),
+                                currentPhone = backStackEntry.arguments?.getString("phone")
+                            )
+                        }
+                        composable(NavigationRoutes.CREATE_DOCUMENT) {
+                            CreateDocumentScreen(
+                                navController = navController,
+                                snackbarHost = snackbarHost
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -115,15 +162,42 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun NavGraphBuilder.authNavGraph(navController: NavHostController, snackbarHost: SnackbarHost) {
-        navigation(
-            route = NavigationRoutes.AUTH_GRAPH,
-            startDestination = NavigationRoutes.SPLASH
-        ){
-            composable(NavigationRoutes.FORGOT_PASSWORD){ ForgotPasswordScreen(navController = navController, snackbarHost = snackbarHost) }
-            composable(NavigationRoutes.LOGIN){ LoginScreen(navController = navController, snackbarHost = snackbarHost) }
-            composable(NavigationRoutes.SPLASH){ SplashScreen(navController = navController) }
-            composable(NavigationRoutes.REGISTER){ RegisterScreen(navController = navController, snackbarHost = snackbarHost) }
+    @Composable
+    fun BottomNavBarWrapper(
+        navController: NavController,
+        snackbarHost: SnackbarHost,
+        screen: @Composable () -> Unit
+    ){
+        Scaffold(
+            scaffoldState = snackbarHost.scaffoldState,
+            bottomBar = {
+                BottomNavigationBar(
+                    items = listOf(
+                        BottomNavItem(
+                            name = "Repairs",
+                            route = NavigationRoutes.DOCUMENT_LIST,
+                            icon = Icons.Default.List
+                        ),
+
+                        BottomNavItem(
+                            name = "Profile",
+                            route = NavigationRoutes.PROFILE,
+                            icon = Icons.Default.Person
+                        )
+                    ),
+                    navController = navController,
+                    onItemClick = {
+                        navController.navigate(it.route) {
+                            popUpTo(navController.currentBackStackEntry?.destination?.route ?: return@navigate) {
+                                inclusive =  true
+                            }
+                        }
+                    })
+            }
+        ){ padding ->
+            Box(modifier = Modifier.padding(padding)){
+                screen()
+            }
         }
     }
 

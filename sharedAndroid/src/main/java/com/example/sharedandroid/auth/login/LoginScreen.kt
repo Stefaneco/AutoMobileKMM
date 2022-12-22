@@ -40,7 +40,7 @@ fun LoginScreen(
     when(val state = viewModel.uiState.collectAsState().value){
         is AuthScreenState.Success -> {
             if (!viewModel.isNavigatedOut){
-                navController.navigate(NavigationRoutes.MAIN_GRAPH) {
+                navController.navigate(NavigationRoutes.DOCUMENT_LIST) {
                     popUpTo(NavigationRoutes.LOGIN){
                         inclusive = true
                     }
