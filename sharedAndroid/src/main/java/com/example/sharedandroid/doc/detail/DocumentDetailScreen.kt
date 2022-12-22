@@ -1,6 +1,9 @@
 package com.example.sharedandroid.doc.detail
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -8,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -94,6 +98,7 @@ fun CarInfo(car: Car){
 
 @Composable
 fun PersonInfo(person: UserProfile){
+    val context = LocalContext.current
     Row(modifier = Modifier
         .fillMaxWidth()
         .background(colorResource(id = R.color.light_gray))){
@@ -103,7 +108,10 @@ fun PersonInfo(person: UserProfile){
                 .padding(10.dp),
             horizontalArrangement = Arrangement.SpaceBetween) {
             Text(text = person.name + " " + person.surname)
-            Text(text = person.phone)
+            Text(text = person.phone,
+            modifier = Modifier.clickable {
+                context.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + person.phone)))
+            })
         }
     }
 }
