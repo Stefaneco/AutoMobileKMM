@@ -15,6 +15,7 @@ class HttpRoutes : IHttpRoutes {
     val CREATE_DOC = "$BASE_URL/repair"
     val GET_DOCS = "$BASE_URL/repair"
     val GET_DOC = "$BASE_URL/repair/%s"
+    val UPDATE_DOC = "$BASE_URL/repair"
 
     override fun login(): String = LOGIN
 
@@ -40,5 +41,6 @@ class HttpRoutes : IHttpRoutes {
 
     override fun getDoc(id: Int): String = GET_DOC.format(id)
 
+    override fun updateDoc(): String = UPDATE_DOC
 
 }

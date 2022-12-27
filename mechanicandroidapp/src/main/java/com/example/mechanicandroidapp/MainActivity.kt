@@ -17,15 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navigation
 import com.example.mechanicandroidapp.doc.create.CreateDocumentScreen
 import com.example.mechanicandroidapp.doc.detail.DocumentDetailScreenMechanic
+import com.example.mechanicandroidapp.doc.edit.EditDocumentScreen
 import com.example.mechanicandroidapp.doc.list.DocumentListScreenMechanic
 import com.example.mechanicandroidapp.ui.theme.AutoMobileTheme
 import com.example.sharedandroid.auth.forgotPassword.ForgotPasswordScreen
@@ -61,12 +60,6 @@ class MainActivity : ComponentActivity() {
                                 ProfileScreen(snackbarHost = snackbarHost, navController = navController)
                             }
                         }
-/*                        composable(NavigationRoutes.PROFILE){
-                            ProfileScreen(
-                                snackbarHost = snackbarHost,
-                                navController = navController
-                            )
-                        }*/
                         composable(NavigationRoutes.DOCUMENT_LIST) {
                             BottomNavBarWrapper(navController = navController, snackbarHost = snackbarHost) {
                                 DocumentListScreenMechanic(
@@ -107,7 +100,10 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(NavigationRoutes.EDIT_DOCUMENT) { backStackEntry ->
-
+                            EditDocumentScreen(
+                                snackbarHost = snackbarHost,
+                                navController =navController,
+                                docId = backStackEntry.arguments?.getString("docId"))
 
                         }
                         composable(NavigationRoutes.CHANGE_PASSWORD){
@@ -169,7 +165,7 @@ class MainActivity : ComponentActivity() {
         screen: @Composable () -> Unit
     ){
         Scaffold(
-            scaffoldState = snackbarHost.scaffoldState,
+            //scaffoldState = snackbarHost.scaffoldState,
             bottomBar = {
                 BottomNavigationBar(
                     items = listOf(

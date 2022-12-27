@@ -59,6 +59,7 @@ object MockApiEngine {
             HttpMethod.Put -> {
                 return when (request.url.encodedPath) {
                     "/api/user" -> respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
+                    "/api/repair" -> respond(mockEmptyResponse, HttpStatusCode.OK, responseHeaders)
                     else -> {
                         error("Unhandled ${request.url.encodedPath}")
                     }

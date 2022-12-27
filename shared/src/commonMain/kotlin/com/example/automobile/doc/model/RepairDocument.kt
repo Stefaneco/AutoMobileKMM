@@ -5,15 +5,27 @@ import kotlinx.serialization.SerialName
 
 @kotlinx.serialization.Serializable
 data class RepairDocument(
-    val id: Int,
+    var id: Int,
     val startDate: String,
     val endDate: String,
     @SerialName("problem_description")
-    val problemDescription: String,
+    var problemDescription: String,
     @SerialName("repair_description")
-    val repairDescription: String,
+    var repairDescription: String,
     val mechanic: UserProfile,
     val customer: UserProfile,
     val car: Car,
     val parts: List<CarPart>
-)
+) {
+    companion object {
+        fun empty(): RepairDocument {
+            return RepairDocument(
+                0, "", "", "", "",
+                UserProfile("", "", "", ""),
+                UserProfile("", "", "", ""),
+                Car("", "", "", "", 0),
+                listOf()
+            )
+        }
+    }
+}

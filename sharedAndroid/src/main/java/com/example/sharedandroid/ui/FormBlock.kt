@@ -21,7 +21,7 @@ fun FormBlock(
     content: @Composable () -> Unit
 ) {
 
-    var isDroppedDown by remember { mutableStateOf(false) }
+    var isDroppedDown by remember { mutableStateOf(true) }
 
     Column(
         verticalArrangement = Arrangement.Center,

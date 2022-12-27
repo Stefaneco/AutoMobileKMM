@@ -18,7 +18,7 @@ fun ValidatedTextField(
     hint: String,
     isFieldValid: (fieldValue: String) -> Boolean,
     errorMessage: String,
-    width: Float = 0.7f,
+    width: Float = 0.8f,
     enabled: Boolean = true,
     onValueChanged: (String) -> Unit = {},
     value: String = "",

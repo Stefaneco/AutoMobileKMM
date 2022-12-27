@@ -10,5 +10,10 @@ data class DocInteractors (
     val isValidProblemDescription: IsValidProblemDescription,
     val createDoc: CreateDoc,
     val getDocs: GetDocs,
-    val getDoc: GetDoc
+    val getDoc: GetDoc,
+    val isValidPartName: IsValidPartName,
+    val isValidPartManufacturer: IsValidPartManufacturer,
+    val isValidPartCatalogNumber: IsValidPartCatalogNumber,
+    val isValidRepairDescription: IsValidRepairDescription,
+    val updateDoc: UpdateDoc
         )

@@ -63,7 +63,7 @@ fun DocList(docs: List<DocListItem>, navController: NavController){
 fun ScreenLoading(){
     Column(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Top,
+        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ){
         LoadingDotsAnimation()

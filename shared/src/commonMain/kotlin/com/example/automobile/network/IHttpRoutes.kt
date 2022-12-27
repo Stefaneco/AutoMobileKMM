@@ -18,4 +18,5 @@ interface IHttpRoutes {
     fun createDoc(): String
     fun getDocs(): String
     fun getDoc(id: Int): String
+    fun updateDoc(): String
 }

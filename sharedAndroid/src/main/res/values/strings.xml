@@ -7,6 +7,10 @@
     <string name="drop_up">Hide section</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="state_used">Used</string>
+    <string name="state_new">New</string>
+    <string name="no_changes_made">No changes made</string>
+    <string name="saved_successfully">Saved Successfully</string>
 
     <!--AUTH-->
     <string name="email">Email</string>
@@ -65,5 +69,11 @@
     <string name="incorrect_car_manufacturer">Incorrect Manufacturer</string>
     <string name="replaced_parts">Replaced Parts</string>
     <string name="is_new_part">Is new</string>
+    <string name="catalog_number">Catalog number</string>
+    <string name="part_manufacturer">Part manufacturer</string>
+    <string name="part_name">Part name</string>
+    <string name="incorrect_part_name">Incorrect part name</string>
+    <string name="incorrect_part_manufacturer">Incorrect part manufacturer</string>
+    <string name="incorrect_catalog_number">Incorrect catalog number</string>
 
 </resources>

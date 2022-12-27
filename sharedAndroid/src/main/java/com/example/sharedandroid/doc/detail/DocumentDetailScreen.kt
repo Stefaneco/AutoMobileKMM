@@ -117,14 +117,15 @@ fun PersonInfo(person: UserProfile){
 }
 
 @Composable
-fun DatesInfo(startDate: String, endDate: String){
+fun DatesInfo(startDate: String, endDate: String? = null){
     Row(modifier = Modifier
         .fillMaxWidth()
         .background(colorResource(id = R.color.light_gray))){
         Row(modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)){
-            Text(text = "$startDate - $endDate")
+            if(endDate.isNullOrEmpty()) Text(text = startDate)
+            else Text(text = "$startDate - $endDate")
         }
     }
 }

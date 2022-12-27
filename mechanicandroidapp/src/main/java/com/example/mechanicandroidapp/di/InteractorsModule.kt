@@ -65,7 +65,12 @@ class InteractorsModule {
             IsValidProblemDescription(),
             CreateDoc(docService),
             GetDocs(docService),
-            GetDoc(docService)
+            GetDoc(docService),
+            IsValidPartName(),
+            IsValidPartManufacturer(),
+            IsValidPartCatalogNumber(),
+            IsValidRepairDescription(),
+            UpdateDoc(docService)
         )
     }
 }

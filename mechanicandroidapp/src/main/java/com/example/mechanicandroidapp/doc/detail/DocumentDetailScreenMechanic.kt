@@ -36,7 +36,7 @@ fun DocumentDetailScreenMechanic(
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.End) {
         FloatingActionButton(onClick = {
-            navController.navigate(NavigationRoutes.EDIT_DOCUMENT)
+            navController.navigate(NavigationRoutes.EDIT_DOCUMENT_ARGS.format(docId))
         }) {
             Icon(Icons.Filled.Edit, contentDescription = "")
         }

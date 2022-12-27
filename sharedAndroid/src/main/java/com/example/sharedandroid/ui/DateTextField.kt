@@ -24,7 +24,7 @@ import com.example.sharedandroid.R
 @Composable
 fun DateTextField(
     hint: String,
-    width: Float = 0.7f,
+    width: Float = 0.8f,
     enabled: Boolean = true,
     onValueChanged: (String) -> Unit = {},
     value: LocalDate = LocalDate.now(),

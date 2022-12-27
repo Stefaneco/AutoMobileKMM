@@ -1,6 +1,7 @@
 package com.example.automobile.doc
 
 import com.example.automobile.doc.model.CreateDocRequest
+import com.example.automobile.doc.model.UpdateDocRequest
 import com.example.automobile.network.IHttpRoutes
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -39,5 +40,12 @@ class DocService(
 
     override suspend fun getDoc(id: Int): HttpResponse {
         return client.get(httpRoutes.getDoc(id)).body()
+    }
+
+    override suspend fun updateDoc(updateDocRequest: UpdateDocRequest): HttpResponse {
+        return client.put(httpRoutes.updateDoc()){
+            contentType(ContentType.Application.Json)
+            setBody(updateDocRequest)
+        }.body()
     }
 }
