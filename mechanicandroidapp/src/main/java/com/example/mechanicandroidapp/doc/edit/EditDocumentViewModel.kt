@@ -15,6 +15,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import java.sql.Timestamp
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
@@ -67,7 +69,13 @@ class EditDocumentViewModel @Inject constructor(
     fun saveChanges(isClosing: Boolean = false){
         if(wasDocEdited() || isClosing){
             docInteractors.updateDoc(
-                UpdateDocRequest(startDoc.id, problemDescription.value, repairDescription.value, parts.value, isClosing))
+                UpdateDocRequest(
+                    startDoc.id,
+                    problemDescription.value,
+                    repairDescription.value,
+                    parts.value,
+                    if(isClosing) { Timestamp.valueOf(LocalDateTime.now().toString()).time }
+                        else 0))
                 .onEach { dataState ->
                     if(dataState.isLoading){
                         _uiState.value = DocDetailScreenState.Loading

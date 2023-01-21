@@ -6,5 +6,5 @@ data class UpdateDocRequest(
     val problemDescription: String,
     val repairDescription: String,
     val parts : List<CarPart>,
-    val isClosed : Boolean
+    val closedTimestamp: Long = 0
 )
