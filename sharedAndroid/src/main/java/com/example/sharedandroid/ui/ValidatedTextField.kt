@@ -18,15 +18,15 @@ fun ValidatedTextField(
     hint: String,
     isFieldValid: (fieldValue: String) -> Boolean,
     errorMessage: String,
-    width: Float = 0.7f,
+    width: Float = 0.8f,
     enabled: Boolean = true,
     onValueChanged: (String) -> Unit = {},
     value: String = "",
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    isSingleLine: Boolean = true
 ) : String {
     var wasFieldClicked by remember { mutableStateOf(false) }
     var wasFiledClickedOut by remember { mutableStateOf(false) }
-    var fieldValue by remember { mutableStateOf(value) }
     var displayError by remember { mutableStateOf(false) }
 
     Column() {
@@ -41,18 +41,17 @@ fun ValidatedTextField(
                     }
                     if (!it.hasFocus && wasFieldClicked) {
                         wasFiledClickedOut = true
-                        displayError = !isFieldValid(fieldValue)
+                        displayError = !isFieldValid(value)
                     }
 
                 },
-            value = fieldValue,
+            value = value,
             label = { Text(text = hint) },
             onValueChange = {
-                fieldValue = it
-                displayError = !isFieldValid(fieldValue) && wasFiledClickedOut
                 onValueChanged(it)
+                displayError = !isFieldValid(it) && wasFiledClickedOut
             },
-            singleLine = true,
+            singleLine = isSingleLine,
             isError = displayError,
             enabled = enabled,
             keyboardOptions = keyboardOptions
@@ -61,5 +60,5 @@ fun ValidatedTextField(
             Text(color = Color.Red,
                 text = errorMessage)
     }
-    return fieldValue
+    return value
 }

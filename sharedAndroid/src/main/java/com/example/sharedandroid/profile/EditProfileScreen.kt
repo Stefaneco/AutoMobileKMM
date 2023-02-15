@@ -66,30 +66,34 @@ fun EditProfileScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ){
-        name = ValidatedTextField(
+        ValidatedTextField(
             value = name,
             hint = stringResource(id = R.string.name),
             isFieldValid = viewModel::isValidName,
-            errorMessage = stringResource(id = R.string.incorrect_name)
+            errorMessage = stringResource(id = R.string.incorrect_name),
+            onValueChanged = {name = it}
         )
-        surname = ValidatedTextField(
+        ValidatedTextField(
             value = surname,
             hint = stringResource(id = R.string.surname),
             isFieldValid = viewModel::isValidSurname,
-            errorMessage = stringResource(id = R.string.incorrect_surname)
+            errorMessage = stringResource(id = R.string.incorrect_surname),
+            onValueChanged = {surname = it}
         )
-        phone = ValidatedTextField(
+        ValidatedTextField(
             value = phone,
             hint = stringResource(id = R.string.phone),
             isFieldValid = viewModel::isValidPhone,
             errorMessage = stringResource(id = R.string.incorrect_phone),
+            onValueChanged = {phone = it},
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
         )
-        email = ValidatedTextField(
+        ValidatedTextField(
             value = email,
             hint = stringResource(id = R.string.email),
             isFieldValid = viewModel::isValidEmail,
-            errorMessage = stringResource(id = R.string.incorrect_email)
+            errorMessage = stringResource(id = R.string.incorrect_email),
+            onValueChanged = {email = it}
         )
         Button(
             modifier = Modifier.padding(5.dp),

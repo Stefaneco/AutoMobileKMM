@@ -35,6 +35,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -55,6 +56,12 @@ android {
 dependencies {
     implementation(project(":shared"))
     implementation(project(":sharedAndroid"))
+
+    //DATEPICKER
+    implementation("io.github.vanpra.compose-material-dialogs:datetime:0.8.1-rc")
+
+    //LOCALDATE.now() for API < 26
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.6")
 
     //TEST
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")

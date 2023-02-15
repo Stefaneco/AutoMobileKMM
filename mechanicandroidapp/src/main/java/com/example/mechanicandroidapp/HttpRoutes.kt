@@ -10,6 +10,12 @@ class HttpRoutes : IHttpRoutes {
     val RESET_PASSWORD = "$BASE_URL/account/recover"
     val USER_PROFILE = "$BASE_URL/user"
     val CHANGE_PASSWORD = "$BASE_URL/account/change_password"
+    val GET_CAR_WITH_VIN = "$BASE_URL/car"
+    val GET_CUSTOMER_WITH_PHONE = "$BASE_URL/customer"
+    val CREATE_DOC = "$BASE_URL/repair"
+    val GET_DOCS = "$BASE_URL/repair"
+    val GET_DOC = "$BASE_URL/repair/%s"
+    val UPDATE_DOC = "$BASE_URL/repair"
 
     override fun login(): String = LOGIN
 
@@ -24,4 +30,17 @@ class HttpRoutes : IHttpRoutes {
     override fun changePassword(): String = CHANGE_PASSWORD
 
     override fun updateProfile(): String = USER_PROFILE
+
+    override fun getCarWithVin(): String = GET_CAR_WITH_VIN
+
+    override fun getCustomerWithPhone(): String = GET_CUSTOMER_WITH_PHONE
+
+    override fun createDoc(): String = CREATE_DOC
+
+    override fun getDocs(): String = GET_DOCS
+
+    override fun getDoc(id: Int): String = GET_DOC.format(id)
+
+    override fun updateDoc(): String = UPDATE_DOC
+
 }

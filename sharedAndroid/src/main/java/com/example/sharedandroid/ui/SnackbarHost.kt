@@ -14,7 +14,7 @@ class SnackbarHost(
     private val coroutineScope: CoroutineScope,
     val scaffoldState: ScaffoldState
 ) {
-    fun showSnackbar(message: String, duration: SnackbarDuration = SnackbarDuration.Long) {
+    fun showSnackbar(message: String, duration: SnackbarDuration = SnackbarDuration.Short) {
         coroutineScope.launch {
             scaffoldState.snackbarHostState.showSnackbar(
                 message = message,

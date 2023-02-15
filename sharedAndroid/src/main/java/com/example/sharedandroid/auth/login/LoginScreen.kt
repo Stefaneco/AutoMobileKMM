@@ -40,7 +40,7 @@ fun LoginScreen(
     when(val state = viewModel.uiState.collectAsState().value){
         is AuthScreenState.Success -> {
             if (!viewModel.isNavigatedOut){
-                navController.navigate(NavigationRoutes.PROFILE) {
+                navController.navigate(NavigationRoutes.DOCUMENT_LIST) {
                     popUpTo(NavigationRoutes.LOGIN){
                         inclusive = true
                     }
@@ -64,10 +64,12 @@ fun LoginScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        email = ValidatedTextField(
+        ValidatedTextField(
+            value = email,
             hint = stringResource(id = R.string.email),
             isFieldValid = viewModel::isValidEmail,
             errorMessage = stringResource(id = R.string.incorrect_email),
+            onValueChanged = {email = it},
             enabled = !loading
         )
         password = ValidatedPasswordTextField(

@@ -3,7 +3,11 @@ package com.example.clientandroidapp.di
 import android.content.Context
 import com.example.automobile.auth.AccountService
 import com.example.automobile.auth.IAccountService
+import com.example.automobile.doc.DocService
+import com.example.automobile.doc.IDocService
 import com.example.automobile.network.*
+import com.example.automobile.profile.IProfileService
+import com.example.automobile.profile.ProfileService
 import com.example.clientandroidapp.HttpRoutes
 import com.example.sharedandroid.network.SessionSource
 import dagger.Module
@@ -22,6 +26,18 @@ class NetworkModule {
     @Provides
     fun provideAccountService(httpClient : HttpClient, httpRoutes: IHttpRoutes): IAccountService {
         return AccountService(httpClient, httpRoutes)
+    }
+
+    @Singleton
+    @Provides
+    fun provideProfileService(httpClient: HttpClient, httpRoutes: IHttpRoutes): IProfileService {
+        return ProfileService(httpClient, httpRoutes)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDocService(httpClient: HttpClient, httpRoutes: IHttpRoutes): IDocService {
+        return DocService(httpClient, httpRoutes)
     }
 
     @Singleton
